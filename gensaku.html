@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>割引後の価格から元の値段を逆算｜割引逆算ツール</title>
+  <meta name="description" content="割引後の価格と割引率から、元の値段（定価）を逆算します。セール価格から元値を知りたいときに便利。" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
+    crossorigin="anonymous"></script>
+
+  <style>
+    body{font-family:system-ui;margin:0;background:#fff;color:#111}
+    .wrap{max-width:760px;margin:0 auto;padding:20px}
+    input{width:100%;padding:10px;margin-top:8px;font-size:16px}
+    button{margin-top:12px;padding:10px 14px;font-size:16px}
+    .result{margin-top:16px;font-size:18px;font-weight:700;line-height:1.6}
+    .nav{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap}
+    .note{margin-top:10px;color:#444;font-size:14px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="nav">
+  <a href="index.html">トップ</a>
+  <a href="10off.html">10%オフ</a>
+  <a href="20off.html">20%オフ</a>
+  <a href="30off.html">30%オフ</a>
+  <a href="about.html">運営者情報</a>
+  <a href="privacy.html">プライバシー</a>
+  <a href="terms.html">利用規約</a>
+</nav>
+
+<h1>割引後の価格から元の値段を逆算</h1>
+<p>「セール価格（割引後）」と「割引率(%)」を入れると、元の値段（定価）を計算します。</p>
+
+<label>割引後の価格（円）</label>
+<input id="after" type="number" placeholder="例：800">
+
+<label>割引率（%）</label>
+<input id="rate" type="number" placeholder="例：20">
+
+<button onclick="calc()">逆算する</button>
+
+<div class="result" id="result"></div>
+<div class="note">※計算式：元値 = 割引後価格 ÷ (1 - 割引率)</div>
+
+</div>
+
+<script>
+function calc(){
+  const after = parseFloat(document.getElementById("after").value);
+  const rate = parseFloat(document.getElementById("rate").value);
+
+  if(!after || isNaN(rate)) return;
+
+  const r = rate / 100;
+  if(r >= 1){
+    document.getElementById("result").textContent = "割引率は100%未満で入力してね。";
+    return;
+  }
+  if(r < 0){
+    document.getElementById("result").textContent = "割引率は0%以上で入力してね。";
+    return;
+  }
+
+  const original = after / (1 - r);
+  const discountAmount = original - after;
+
+  document.getElementById("result").innerHTML =
+    `元の値段（定価）： <b>${original.toLocaleString(undefined,{maximumFractionDigits:2})} 円</b><br>` +
+    `割引額： <b>${discountAmount.toLocaleString(undefined,{maximumFractionDigits:2})} 円</b>`;
+}
+</script>
+</body>
+</html>
