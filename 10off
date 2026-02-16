@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10%オフ計算｜割引後の価格を一瞬で計算</title>
+  <meta name="description" content="10%オフの割引価格をすぐに計算できる無料ツール。セール・値引き計算に便利。" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
+    crossorigin="anonymous"></script>
+
+  <style>
+    body{font-family:system-ui;margin:0;background:#fff;color:#111}
+    .wrap{max-width:720px;margin:0 auto;padding:20px}
+    input{width:100%;padding:10px;margin-top:8px;font-size:16px}
+    button{margin-top:12px;padding:10px 14px;font-size:16px}
+    .result{margin-top:16px;font-size:20px;font-weight:bold}
+    .nav{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="nav">
+  <a href="index.html">トップ</a>
+  <a href="about.html">運営者情報</a>
+  <a href="privacy.html">プライバシー</a>
+  <a href="terms.html">利用規約</a>
+</nav>
+
+<h1>10%オフ計算</h1>
+<p>元の価格を入力すると、10%割引後の価格を計算します。</p>
+
+<input id="price" type="number" placeholder="例：1000">
+<button onclick="calc()">計算する</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+function calc(){
+  const price = parseFloat(document.getElementById("price").value);
+  if(!price){return;}
+  const discounted = price * 0.9;
+  document.getElementById("result").textContent =
+    "割引後価格： " + discounted.toLocaleString() + " 円";
+}
+</script>
+</body>
+</html>
