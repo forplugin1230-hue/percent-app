@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>二重割引計算｜○%オフ→さらに○%オフの最終価格</title>
+  <meta name="description" content="二重割引（例：20%オフの後にさらに10%オフ）の最終価格と実質割引率を計算します。" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
+    crossorigin="anonymous"></script>
+
+  <style>
+    body{font-family:system-ui;margin:0;background:#fff;color:#111}
+    .wrap{max-width:760px;margin:0 auto;padding:20px}
+    input{width:100%;padding:10px;margin-top:8px;font-size:16px}
+    button{margin-top:12px;padding:10px 14px;font-size:16px}
+    .result{margin-top:16px;font-size:18px;font-weight:700;line-height:1.7}
+    .nav{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap}
+    .row{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:720px){ .row{grid-template-columns:1fr 1fr} }
+    .note{margin-top:10px;color:#444;font-size:14px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="nav">
+  <a href="index.html">トップ</a>
+  <a href="10off.html">10%オフ</a>
+  <a href="20off.html">20%オフ</a>
+  <a href="30off.html">30%オフ</a>
+  <a href="gensaku.html">割引逆算（元値）</a>
+  <a href="about.html">運営者情報</a>
+  <a href="privacy.html">プライバシー</a>
+  <a href="terms.html">利用規約</a>
+</nav>
+
+<h1>二重割引計算</h1>
+<p>「○%オフ」→「さらに○%オフ」の最終価格と、実質の割引率を計算します。</p>
+
+<div class="row">
+  <div>
+    <label>元の価格（円）</label>
+    <input id="price" type="number" placeholder="例：10000">
+  </div>
+  <div>
+    <label>1回目の割引率（%）</label>
+    <input id="r1" type="number" placeholder="例：20">
+  </div>
+  <div>
+    <label>2回目の割引率（%）</label>
+    <input id="r2" type="number" placeholder="例：10">
+  </div>
+</div>
+
+<button onclick="calc()">計算する</button>
+
+<div class="result" id="result"></div>
+<div class="note">※実質割引率 = 1 - (1-r1)×(1-r2)</div>
+
+</div>
+
+<script>
+function calc(){
+  const price = parseFloat(document.getElementById("price").value);
+  const r1 = parseFloat(document.getElementById("r1").value);
+  const r2 = parseFloat(document.getElementById("r2").value);
+
+  if(!price || isNaN(r1) || isNaN(r2)) return;
+
+  const a = r1/100, b = r2/100;
+  if(a<0||b<0||a>=1||b>=1){
+    document.getElementById("result").textContent = "割引率は0%以上100%未満で入力してね。";
+    return;
+  }
+
+  const after1 = price * (1-a);
+  const after2 = after1 * (1-b);
+  const effective = 1 - (1-a)*(1-b); // 実質割引率
+  const discountAmount = price - after2;
+
+  document.getElementById("result").innerHTML =
+    `最終価格： <b>${after2.toLocaleString(undefined,{maximumFractionDigits:2})} 円</b><br>` +
+    `実質割引率： <b>${(effective*100).toFixed(2)} %</b><br>` +
+    `合計の割引額： <b>${discountAmount.toLocaleString(undefined,{maximumFractionDigits:2})} 円</b>`;
+}
+</script>
+</body>
+</html>
