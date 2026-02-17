@@ -244,13 +244,159 @@ button:active {
     font-size: 14px;
 }
 
-/* レスポンシブ */
+/* ===========================
+   アプリレイアウト（新規）
+   =========================== */
+
+/* --- CSS変数追加 --- */
+:root {
+    --header-height: 56px;
+}
+
+/* --- body オーバーライド（ヘッダー固定対応） --- */
+body {
+    padding: 20px;
+    padding-top: calc(var(--header-height) + 16px);
+    background: #eef2f7;
+}
+
+/* --- 固定ヘッダー --- */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--primary);
+    color: white;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.app-header-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.app-logo {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0;
+}
+
+.app-nav {
+    display: flex;
+    gap: 6px;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* --- メインカード --- */
+.app-card {
+    background: var(--surface);
+    border-radius: 16px;
+    margin: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* カード内では input-section の影・枠を消す（二重枠防止） */
+.app-card .input-section {
+    border: none;
+    box-shadow: none;
+    background: #f8fafc;
+}
+
+/* --- セクション見出し --- */
+.section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-left: 2px;
+}
+
+/* --- 結果セクション強化（オーバーライド） --- */
+.app-card .result-section {
+    border-radius: 16px;
+    padding: 32px 24px;
+    min-height: 140px;
+    box-shadow:
+        0 8px 24px rgba(37, 99, 235, 0.3),
+        0 2px 8px rgba(37, 99, 235, 0.15);
+}
+
+.app-card .result-value {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+/* --- 履歴セクション（カード内調整） --- */
+.app-card .history-section {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.app-card .history-list {
+    background: #f8fafc;
+    border: none;
+}
+
+/* ===========================
+   レスポンシブ
+   =========================== */
+
 @media (max-width: 400px) {
     h1 {
         font-size: 28px;
     }
 
-    .result-value {
+    .app-logo {
+        font-size: 16px;
+    }
+
+    .nav-link {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .app-card {
+        margin: 12px;
+        padding: 20px 16px;
+    }
+
+    .result-value,
+    .app-card .result-value {
         font-size: 36px;
     }
 

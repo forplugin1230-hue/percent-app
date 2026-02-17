@@ -7,45 +7,55 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
-        <h1>⚡ 秒速パーセント</h1>
-        <div class="subtitle">簡単・高速な割合計算アプリ</div>
-    </div>
-
-    <div class="input-section">
-        <div class="input-group">
-            <label for="amount">金額</label>
-            <input type="number" id="amount" placeholder="10000" inputmode="decimal">
+    <header class="app-header">
+        <div class="app-header-inner">
+            <h1 class="app-logo">⚡ 秒速パーセント</h1>
+            <nav class="app-nav">
+                <a href="index.html" class="nav-link active">割合計算</a>
+                <a href="消費税/index.html" class="nav-link">消費税</a>
+            </nav>
         </div>
-        <div class="input-group">
-            <label for="percentage">パーセント (%)</label>
-            <input type="number" id="percentage" placeholder="20" inputmode="decimal">
-        </div>
-    </div>
+    </header>
 
-    <div class="button-grid">
-        <button class="btn-discount" onclick="calculateDiscount()">○％オフ</button>
-        <button class="btn-reverse" onclick="calculateReverse()">元値逆算</button>
-        <button class="btn-increase" onclick="calculateIncrease()">○％増加</button>
-        <button class="btn-decrease" onclick="calculateDecrease()">○％減少</button>
-        <button class="btn-tax-in" onclick="calculateTaxIn()">税込み計算</button>
-        <button class="btn-tax-out" onclick="calculateTaxOut()">税抜き計算</button>
-    </div>
-
-    <div class="result-section" id="resultSection">
-        <div class="result-label">計算結果がここに表示されます</div>
-        <div class="result-value">-</div>
-    </div>
-
-    <div class="history-section">
-        <div class="history-header">
-            <div class="history-title">📝 計算履歴</div>
-            <button class="clear-btn" onclick="clearHistory()">クリア</button>
+    <main class="app-card">
+        <div class="section-label">入力</div>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="amount">金額</label>
+                <input type="number" id="amount" placeholder="10000" inputmode="decimal">
+            </div>
+            <div class="input-group">
+                <label for="percentage">パーセント (%)</label>
+                <input type="number" id="percentage" placeholder="20" inputmode="decimal">
+            </div>
         </div>
-        <div class="history-list" id="historyList">
-            <div class="empty-history">まだ計算履歴がありません</div>
+
+        <div class="section-label">計算</div>
+        <div class="button-grid">
+            <button class="btn-discount" onclick="calculateDiscount()">○％オフ</button>
+            <button class="btn-reverse" onclick="calculateReverse()">元値逆算</button>
+            <button class="btn-increase" onclick="calculateIncrease()">○％増加</button>
+            <button class="btn-decrease" onclick="calculateDecrease()">○％減少</button>
+            <button class="btn-tax-in" onclick="calculateTaxIn()">税込み計算</button>
+            <button class="btn-tax-out" onclick="calculateTaxOut()">税抜き計算</button>
         </div>
-    </div>
+
+        <div class="section-label">結果</div>
+        <div class="result-section" id="resultSection">
+            <div class="result-label">計算結果がここに表示されます</div>
+            <div class="result-value">-</div>
+        </div>
+
+        <div class="history-section">
+            <div class="history-header">
+                <div class="history-title">📝 計算履歴</div>
+                <button class="clear-btn" onclick="clearHistory()">クリア</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="empty-history">まだ計算履歴がありません</div>
+            </div>
+        </div>
+    </main>
 
     <script>
         let history = [];
