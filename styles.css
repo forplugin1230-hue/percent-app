@@ -405,3 +405,73 @@ body {
         padding: 14px;
     }
 }
+/* ===========================
+   下部導線（関連ツール + フッター）
+   =========================== */
+
+.tools {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.tools-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.tool-link {
+  display: block;
+  padding: 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fafc;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.tool-link:hover {
+  background: #eef2ff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
+}
+
+.footer {
+  margin: 22px 16px 28px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+  .tools-grid { grid-template-columns: 1fr; }
+}
