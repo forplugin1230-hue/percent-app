@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+ <html lang="ja">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>時給計算ツール｜秒速パーセント</title>
+     <meta name="description" content="時給から日給・月収・年収をすぐに計算できる無料
+ ツールです。アルバイトやパートの給与シミュレーションに最適。時給・労働時間・勤務日数
+ を入力するだけで、手取り前の総支給額がひと目でわかります。">
+     <link rel="stylesheet" href="styles.css">
+     <!-- AdSense -->
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
+ ?client=ca-pub-6896610375368659"
+       crossorigin="anonymous"></script>
+ </head>
+ <body>
+     <header class="app-header">
+         <div class="app-header-inner">
+             <h1 class="app-logo">⚡ 秒速パーセント</h1>
+             <nav class="app-nav">
+                 <a href="index.html" class="nav-link">割合計算</a>
+                 <a href="jikyuu.html" class="nav-link active">時給計算</a>
+                 <a href="消費税/index.html" class="nav-link">消費税</a>
+             </nav>
+         </div>
+     </header>
+
+     <main class="app-card">
+         <h2 
+ style="font-size:20px;margin-bottom:8px;color:var(--text);">時給計算ツール</h2>
+         <p 
+ style="font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">
+
+ 時給・1日の労働時間・月の勤務日数を入力すると、日給・月収・年収を自動で計算します。
+         </p>
+
+         <div class="section-label">入力</div>
+         <div class="input-section">
+             <div class="input-group">
+                 <label for="hourlyWage">時給（円）</label>
+                 <input type="number" id="hourlyWage" placeholder="1200" 
+ inputmode="decimal">
+             </div>
+             <div class="input-group">
+                 <label for="hoursPerDay">1日の労働時間</label>
+                 <input type="number" id="hoursPerDay" placeholder="8" 
+ inputmode="decimal">
+             </div>
+             <div class="input-group">
+                 <label for="daysPerMonth">月の勤務日数</label>
+                 <input type="number" id="daysPerMonth" placeholder="22" 
+ inputmode="decimal">
+             </div>
+         </div>
+
+         <div class="button-grid" style="grid-template-columns:1fr;">
+             <button onclick="calculate()">計算する</button>
+         </div>
+
+         <div class="section-label">結果</div>
+         <div class="result-section" id="resultSection">
+             <div class="result-label">計算結果がここに表示されます</div>
+             <div class="result-value">-</div>
+         </div>
+
+         <div id="detailCards"></div>
+
+         <!-- 関連ツール -->
+         <section class="tools" aria-label="関連ツール">
+             <div class="tools-title">関連ツール</div>
+             <div class="tools-grid">
+                 <a class="tool-link" href="jikyuu.html">時給計算</a>
+                 <a class="tool-link" href="index.html">割合計算</a>
+                 <a class="tool-link" href="10off.html">10%オフ</a>
+                 <a class="tool-link" href="20off.html">20%オフ</a>
+                 <a class="tool-link" href="30off.html">30%オフ</a>
+                 <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+                 <a class="tool-link" 
+ href="https://tax-calculator-theta-six.vercel.app" target="_blank" 
+ rel="noopener">税込・税抜ツール</a>
+             </div>
+         </section>
+     </main>
+
+     <footer class="footer">
+         <div class="footer-links">
+             <a href="howto.html">使い方</a>
+             <a href="about.html">運営者情報</a>
+             <a href="terms.html">利用規約</a>
+             <a href="privacy.html">プライバシーポリシー</a>
+             <a href="contact.html">お問い合わせ</a>
+         </div>
+         <div>© 秒速パーセント</div>
+     </footer>
+
+     <script>
+         function calculate() {
+             var wage = parseFloat(document.getElementById('hourlyWage').value);
+             var hours = parseFloat(document.getElementById('hoursPerDay').value);
+             var days = parseFloat(document.getElementById('daysPerMonth').value);
+
+             if (isNaN(wage) || isNaN(hours) || isNaN(days)) {
+                 alert('すべての項目を入力してください');
+                 return;
+             }
+
+             var daily = wage * hours;
+             var monthly = daily * days;
+             var yearly = monthly * 12;
+
+             var resultSection = document.getElementById('resultSection');
+             resultSection.innerHTML =
+                 '<div class="result-label">月収</div>' +
+                 '<div class="result-value">¥' + monthly.toLocaleString() + '</div>' +
+                 '<div class="result-detail">時給 ' + wage.toLocaleString() + '円 × '
+ + hours + '時間 × ' + days + '日</div>';
+
+             document.getElementById('detailCards').innerHTML =
+                 '<div style="display:grid;grid-template-columns:1fr
+ 1fr;gap:10px;margin-top:12px;">' +
+                     '<div
+ style="background:var(--primary-light);border-radius:12px;padding:18px
+ 14px;text-align:center;">' +
+                         '<div
+ style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">日給</div>' +
+                         '<div
+ style="font-size:24px;font-weight:800;color:var(--primary);">¥' +
+ daily.toLocaleString() + '</div>' +
+                     '</div>' +
+                     '<div
+ style="background:var(--primary-light);border-radius:12px;padding:18px
+ 14px;text-align:center;">' +
+                         '<div
+ style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">年収</div>' +
+                         '<div
+ style="font-size:24px;font-weight:800;color:var(--primary);">¥' +
+ yearly.toLocaleString() + '</div>' +
+                     '</div>' +
+                 '</div>';
+         }
+     </script>
+ </body>
+ </html>
