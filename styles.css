@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap');
+
 /* ===========================
-   秒速パーセント - 共通スタイル
+   カルクル - 共通スタイル
    =========================== */
 
 :root {
@@ -284,8 +286,10 @@ body {
 }
 
 .app-logo {
-    font-size: 18px;
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     color: white;
     margin-bottom: 0;
     text-decoration: none;
@@ -333,17 +337,6 @@ body {
     background: #f8fafc;
 }
 
-/* --- セクション見出し --- */
-.section-label {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-    padding-left: 2px;
-}
-
 /* --- 結果セクション強化（オーバーライド） --- */
 .app-card .result-section {
     border-radius: 16px;
@@ -383,7 +376,7 @@ body {
     }
 
     .app-logo {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .nav-link {
