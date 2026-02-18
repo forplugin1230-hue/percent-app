@@ -5,49 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>割引後の価格から元の値段を逆算｜割引逆算ツール</title>
   <meta name="description" content="割引後の価格と割引率から、元の値段（定価）を逆算します。セール価格から元値を知りたいときに便利。" />
-
+  <link rel="stylesheet" href="styles.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
     crossorigin="anonymous"></script>
-
-  <style>
-    body{font-family:system-ui;margin:0;background:#fff;color:#111}
-    .wrap{max-width:760px;margin:0 auto;padding:20px}
-    input{width:100%;padding:10px;margin-top:8px;font-size:16px}
-    button{margin-top:12px;padding:10px 14px;font-size:16px}
-    .result{margin-top:16px;font-size:18px;font-weight:700;line-height:1.6}
-    .nav{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap}
-    .note{margin-top:10px;color:#444;font-size:14px}
-  </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="wrap">
 
-<nav class="nav">
-  <a href="index.html">トップ</a>
-  <a href="10off.html">10%オフ</a>
-  <a href="20off.html">20%オフ</a>
-  <a href="30off.html">30%オフ</a>
-  <a href="about.html">運営者情報</a>
-  <a href="privacy.html">プライバシー</a>
-  <a href="terms.html">利用規約</a>
-</nav>
+<header class="app-header">
+  <div class="app-header-inner">
+    <a href="index.html" class="app-logo">⚡ 秒速パーセント</a>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+    </nav>
+  </div>
+</header>
 
-<h1>割引後の価格から元の値段を逆算</h1>
-<p>「セール価格（割引後）」と「割引率(%)」を入れると、元の値段（定価）を計算します。</p>
+<main class="app-card">
+  <h1>割引後の価格から元の値段を逆算</h1>
+  <p>「セール価格（割引後）」と「割引率(%)」を入れると、元の値段（定価）を計算します。</p>
 
-<label>割引後の価格（円）</label>
-<input id="after" type="number" placeholder="例：800">
+  <div class="section-label">入力</div>
+  <div class="input-section">
+    <div class="input-group">
+      <label for="after">割引後の価格（円）</label>
+      <input id="after" type="number" placeholder="例：800" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="rate">割引率（%）</label>
+      <input id="rate" type="number" placeholder="例：20" inputmode="decimal">
+    </div>
+  </div>
 
-<label>割引率（%）</label>
-<input id="rate" type="number" placeholder="例：20">
+  <button onclick="calc()" style="width:100%;margin-bottom:20px;">逆算する</button>
 
-<button onclick="calc()">逆算する</button>
+  <div class="section-label">結果</div>
+  <div class="tool-result" id="result"></div>
+  <p class="note">※計算式：元値 = 割引後価格 ÷ (1 - 割引率)</p>
 
-<div class="result" id="result"></div>
-<div class="note">※計算式：元値 = 割引後価格 ÷ (1 - 割引率)</div>
+  <!-- 次に便利な計算 -->
+  <section class="tools" aria-label="次に便利な計算">
+    <div class="tools-title">次に便利な計算</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="20off.html">20%オフ</a>
+      <a class="tool-link" href="30off.html">30%オフ</a>
+      <a class="tool-link" href="doubleoff.html">二重割引</a>
+    </div>
+  </section>
+</main>
 
-</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">運営者情報</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <div>© 秒速パーセント</div>
+</footer>
 
 <script>
 function calc(){

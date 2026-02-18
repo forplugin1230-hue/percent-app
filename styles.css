@@ -288,6 +288,7 @@ body {
     font-weight: 700;
     color: white;
     margin-bottom: 0;
+    text-decoration: none;
 }
 
 .app-nav {
@@ -474,4 +475,67 @@ body {
 
 @media (max-width: 400px) {
   .tools-grid { grid-template-columns: 1fr; }
+}
+
+/* ===========================
+   コンテンツページ（info系）
+   =========================== */
+
+.app-card h1 {
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+
+.app-card h2 {
+    font-size: 16px;
+    margin: 18px 0 8px;
+}
+
+.app-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.app-card ul,
+.app-card ol {
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.app-card .card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 14px 0;
+}
+
+.app-card .muted {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.app-card .note {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ツールページ用の結果表示 */
+.tool-result {
+    margin-top: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+/* doubleoff用の行レイアウト */
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }

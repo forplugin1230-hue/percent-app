@@ -5,40 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>20%オフ計算｜割引後の価格を一瞬で計算</title>
   <meta name="description" content="20%オフの割引価格をすぐに計算できる無料ツール。セール・値引き計算に便利。" />
-
+  <link rel="stylesheet" href="styles.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
     crossorigin="anonymous"></script>
-
-  <style>
-    body{font-family:system-ui;margin:0;background:#fff;color:#111}
-    .wrap{max-width:720px;margin:0 auto;padding:20px}
-    input{width:100%;padding:10px;margin-top:8px;font-size:16px}
-    button{margin-top:12px;padding:10px 14px;font-size:16px}
-    .result{margin-top:16px;font-size:20px;font-weight:bold}
-    .nav{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap}
-  </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="wrap">
 
-<nav class="nav">
-  <a href="index.html">トップ</a>
-  <a href="10off.html">10%オフ</a>
-  <a href="about.html">運営者情報</a>
-  <a href="privacy.html">プライバシー</a>
-  <a href="terms.html">利用規約</a>
-</nav>
+<header class="app-header">
+  <div class="app-header-inner">
+    <a href="index.html" class="app-logo">⚡ 秒速パーセント</a>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+    </nav>
+  </div>
+</header>
 
-<h1>20%オフ計算</h1>
-<p>元の価格を入力すると、20%割引後の価格を計算します。</p>
+<main class="app-card">
+  <h1>20%オフ計算</h1>
+  <p>元の価格を入力すると、20%割引後の価格を計算します。</p>
 
-<input id="price" type="number" placeholder="例：1000">
-<button onclick="calc()">計算する</button>
+  <div class="section-label">入力</div>
+  <div class="input-section">
+    <div class="input-group">
+      <label for="price">金額（円）</label>
+      <input id="price" type="number" placeholder="例：1000" inputmode="decimal">
+    </div>
+  </div>
 
-<div class="result" id="result"></div>
+  <button onclick="calc()" style="width:100%;margin-bottom:20px;">計算する</button>
 
-</div>
+  <div class="section-label">結果</div>
+  <div class="tool-result" id="result"></div>
+
+  <!-- 次に便利な計算 -->
+  <section class="tools" aria-label="次に便利な計算">
+    <div class="tools-title">次に便利な計算</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="30off.html">30%オフ</a>
+      <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+      <a class="tool-link" href="doubleoff.html">二重割引</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">運営者情報</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <div>© 秒速パーセント</div>
+</footer>
 
 <script>
 function calc(){

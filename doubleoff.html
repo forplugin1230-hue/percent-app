@@ -5,61 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>二重割引計算｜○%オフ→さらに○%オフの最終価格</title>
   <meta name="description" content="二重割引（例：20%オフの後にさらに10%オフ）の最終価格と実質割引率を計算します。" />
-
+  <link rel="stylesheet" href="styles.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
     crossorigin="anonymous"></script>
-
-  <style>
-    body{font-family:system-ui;margin:0;background:#fff;color:#111}
-    .wrap{max-width:760px;margin:0 auto;padding:20px}
-    input{width:100%;padding:10px;margin-top:8px;font-size:16px}
-    button{margin-top:12px;padding:10px 14px;font-size:16px}
-    .result{margin-top:16px;font-size:18px;font-weight:700;line-height:1.7}
-    .nav{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap}
-    .row{display:grid;grid-template-columns:1fr;gap:10px}
-    @media(min-width:720px){ .row{grid-template-columns:1fr 1fr} }
-    .note{margin-top:10px;color:#444;font-size:14px}
-  </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="wrap">
 
-<nav class="nav">
-  <a href="index.html">トップ</a>
-  <a href="10off.html">10%オフ</a>
-  <a href="20off.html">20%オフ</a>
-  <a href="30off.html">30%オフ</a>
-  <a href="gensaku.html">割引逆算（元値）</a>
-  <a href="about.html">運営者情報</a>
-  <a href="privacy.html">プライバシー</a>
-  <a href="terms.html">利用規約</a>
-</nav>
-
-<h1>二重割引計算</h1>
-<p>「○%オフ」→「さらに○%オフ」の最終価格と、実質の割引率を計算します。</p>
-
-<div class="row">
-  <div>
-    <label>元の価格（円）</label>
-    <input id="price" type="number" placeholder="例：10000">
+<header class="app-header">
+  <div class="app-header-inner">
+    <a href="index.html" class="app-logo">⚡ 秒速パーセント</a>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+    </nav>
   </div>
-  <div>
-    <label>1回目の割引率（%）</label>
-    <input id="r1" type="number" placeholder="例：20">
+</header>
+
+<main class="app-card">
+  <h1>二重割引計算</h1>
+  <p>「○%オフ」→「さらに○%オフ」の最終価格と、実質の割引率を計算します。</p>
+
+  <div class="section-label">入力</div>
+  <div class="input-section">
+    <div class="input-group">
+      <label for="price">元の価格（円）</label>
+      <input id="price" type="number" placeholder="例：10000" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="r1">1回目の割引率（%）</label>
+      <input id="r1" type="number" placeholder="例：20" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="r2">2回目の割引率（%）</label>
+      <input id="r2" type="number" placeholder="例：10" inputmode="decimal">
+    </div>
   </div>
-  <div>
-    <label>2回目の割引率（%）</label>
-    <input id="r2" type="number" placeholder="例：10">
+
+  <button onclick="calc()" style="width:100%;margin-bottom:20px;">計算する</button>
+
+  <div class="section-label">結果</div>
+  <div class="tool-result" id="result"></div>
+  <p class="note">※実質割引率 = 1 - (1-r1)×(1-r2)</p>
+
+  <!-- 次に便利な計算 -->
+  <section class="tools" aria-label="次に便利な計算">
+    <div class="tools-title">次に便利な計算</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="20off.html">20%オフ</a>
+      <a class="tool-link" href="30off.html">30%オフ</a>
+      <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">運営者情報</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
   </div>
-</div>
-
-<button onclick="calc()">計算する</button>
-
-<div class="result" id="result"></div>
-<div class="note">※実質割引率 = 1 - (1-r1)×(1-r2)</div>
-
-</div>
+  <div>© 秒速パーセント</div>
+</footer>
 
 <script>
 function calc(){
@@ -77,7 +88,7 @@ function calc(){
 
   const after1 = price * (1-a);
   const after2 = after1 * (1-b);
-  const effective = 1 - (1-a)*(1-b); // 実質割引率
+  const effective = 1 - (1-a)*(1-b);
   const discountAmount = price - after2;
 
   document.getElementById("result").innerHTML =
