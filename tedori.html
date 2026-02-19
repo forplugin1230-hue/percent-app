@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手取り計算ツール｜月収から手取り額を簡単シミュレーション【カルクル】</title>
+    <meta name="description" content="月収（額面）を入力するだけで手取り額の目安を計算できる無料ツールです。社会保険料・所得税・住民税の概算控除額も表示。転職・就職時の収入シミュレーションにご活用ください。">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+<header class="app-header">
+    <div class="app-header-inner">
+        <a href="index.html" class="app-logo">カルクル</a>
+        <nav class="app-nav">
+            <a href="index.html" class="nav-link">割合計算</a>
+            <a href="jikyuu.html" class="nav-link">時給計算</a>
+        </nav>
+    </div>
+</header>
+
+<main class="app-card">
+    <h1>手取り計算ツール</h1>
+    <p>月収（額面）を入力すると、社会保険料・所得税・住民税を概算で差し引いた手取り額の目安を計算します。</p>
+
+    <div class="input-section">
+        <div class="input-group">
+            <label for="monthlyGross">月収・額面（円）</label>
+            <input type="number" id="monthlyGross" placeholder="250000" inputmode="decimal">
+        </div>
+    </div>
+
+    <div class="button-grid" style="grid-template-columns:1fr;">
+        <button onclick="calcTedori()">手取りを計算する</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+        <div class="result-label">計算結果がここに表示されます</div>
+        <div class="result-value">-</div>
+    </div>
+
+    <div id="detailCards"></div>
+
+    <p class="note">※概算値です。扶養人数・年齢・自治体・賞与有無などにより実際の金額は異なります。40歳未満・扶養なし・東京都の会社員を想定した簡易計算です。</p>
+
+    <h2>手取り額の計算方法</h2>
+    <p>
+        手取り額は、額面の月収から「社会保険料」「所得税」「住民税」を差し引いた金額です。
+        社会保険料には健康保険・厚生年金・雇用保険が含まれ、額面のおよそ15%前後になります。
+        所得税は課税所得に応じた累進税率で計算され、住民税は一律約10%が課税されます。
+        一般的に、手取りは額面の75〜85%程度が目安です。
+        正確な金額は勤務先の条件や控除内容によって変わるため、詳細は給与明細や税理士にご確認ください。
+    </p>
+
+    <!-- 他の計算ツール -->
+    <section class="tools" aria-label="他の計算ツール">
+        <div class="tools-title">他の計算ツール</div>
+        <div class="tools-grid">
+            <a class="tool-link" href="index.html">割合計算</a>
+            <a class="tool-link" href="jikyuu.html">時給計算</a>
+            <a class="tool-link" href="10off.html">10%オフ</a>
+            <a class="tool-link" href="20off.html">20%オフ</a>
+            <a class="tool-link" href="30off.html">30%オフ</a>
+            <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+            <a class="tool-link" href="doubleoff.html">二重割引</a>
+            <a class="tool-link" href="hourly-table.html">時給早見表</a>
+            <a class="tool-link" href="rate-table.html">割合早見表</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <a href="howto.html">使い方</a>
+        <a href="about.html">運営者情報</a>
+        <a href="terms.html">利用規約</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+    </div>
+    <div>© 2025 カルクル</div>
+</footer>
+
+<script>
+function calcTedori() {
+    var gross = parseFloat(document.getElementById('monthlyGross').value);
+    if (isNaN(gross) || gross <= 0) {
+        alert('月収（額面）を入力してください');
+        return;
+    }
+
+    var yearly = gross * 12;
+
+    // 社会保険料（月額ベース）
+    var healthIns = gross * 0.04985;   // 健康保険（協会けんぽ東京・本人負担）
+    var pension   = gross * 0.0915;    // 厚生年金（本人負担）
+    var empIns    = gross * 0.006;     // 雇用保険（本人負担）
+    var socialIns = healthIns + pension + empIns;
+
+    // 年収ベースで所得税を計算
+    var yearlySocial = socialIns * 12;
+    var employment = Math.min(yearly * 0.3 + 80000, 1900000);
+    if (yearly <= 1625000) employment = 550000;
+    else if (yearly <= 1800000) employment = yearly * 0.4 - 100000;
+    else if (yearly <= 3600000) employment = yearly * 0.3 + 80000;
+    else if (yearly <= 6600000) employment = yearly * 0.2 + 440000;
+    else if (yearly <= 8500000) employment = yearly * 0.1 + 1100000;
+    else employment = 1950000;
+
+    var basicDeduction = 480000;
+    var taxableIncome = yearly - yearlySocial - employment - basicDeduction;
+    if (taxableIncome < 0) taxableIncome = 0;
+
+    // 所得税（累進課税）
+    var incomeTaxYearly = 0;
+    if (taxableIncome <= 1950000) incomeTaxYearly = taxableIncome * 0.05;
+    else if (taxableIncome <= 3300000) incomeTaxYearly = taxableIncome * 0.10 - 97500;
+    else if (taxableIncome <= 6950000) incomeTaxYearly = taxableIncome * 0.20 - 427500;
+    else if (taxableIncome <= 9000000) incomeTaxYearly = taxableIncome * 0.23 - 636000;
+    else if (taxableIncome <= 18000000) incomeTaxYearly = taxableIncome * 0.33 - 1536000;
+    else if (taxableIncome <= 40000000) incomeTaxYearly = taxableIncome * 0.40 - 2796000;
+    else incomeTaxYearly = taxableIncome * 0.45 - 4796000;
+
+    // 復興特別所得税
+    incomeTaxYearly = incomeTaxYearly * 1.021;
+    var incomeTax = Math.floor(incomeTaxYearly / 12);
+
+    // 住民税（一律10%＋均等割）
+    var residentTaxYearly = taxableIncome * 0.10 + 5000;
+    var residentTax = Math.floor(residentTaxYearly / 12);
+
+    var totalDeduction = Math.floor(socialIns) + incomeTax + residentTax;
+    var tedori = Math.floor(gross - totalDeduction);
+
+    var resultSection = document.getElementById('resultSection');
+    resultSection.innerHTML =
+        '<div class="result-label">手取り（月額）</div>' +
+        '<div class="result-value">¥' + tedori.toLocaleString() + '</div>' +
+        '<div class="result-detail">額面 ' + gross.toLocaleString() + '円 から控除合計 ' + totalDeduction.toLocaleString() + '円 を差引</div>';
+
+    document.getElementById('detailCards').innerHTML =
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">' +
+        '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+        '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">社会保険料</div>' +
+        '<div style="font-size:20px;font-weight:800;color:var(--primary);">¥' + Math.floor(socialIns).toLocaleString() + '</div>' +
+        '</div>' +
+        '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+        '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">所得税</div>' +
+        '<div style="font-size:20px;font-weight:800;color:var(--primary);">¥' + incomeTax.toLocaleString() + '</div>' +
+        '</div>' +
+        '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+        '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">住民税</div>' +
+        '<div style="font-size:20px;font-weight:800;color:var(--primary);">¥' + residentTax.toLocaleString() + '</div>' +
+        '</div>' +
+        '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+        '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">手取り年収</div>' +
+        '<div style="font-size:20px;font-weight:800;color:var(--primary);">¥' + (tedori * 12).toLocaleString() + '</div>' +
+        '</div>' +
+        '</div>';
+}
+</script>
+
+</body>
+</html>
