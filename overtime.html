@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>残業代計算ツール｜時給・割増率から残業代を簡単計算【カルクル】</title>
+  <meta name="description" content="時給と残業時間を入力するだけで残業代を簡単に計算できる無料ツールです。法定の割増率（25%・35%・50%・60%）に対応。深夜残業や休日出勤の残業代もすぐに確認できます。" />
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <a href="index.html" class="app-logo">カルクル</a>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+      <a href="tedori.html" class="nav-link">手取り計算</a>
+    </nav>
+  </div>
+</header>
+
+<main class="app-card">
+  <h1>残業代計算ツール</h1>
+  <p>時給（または月給から算出した時間単価）と残業時間を入力し、割増率を選ぶだけで残業代の目安を計算できます。法定の割増率プリセットのほか、任意の割増率も指定可能です。</p>
+
+  <div class="input-section">
+    <div class="input-group">
+      <label for="baseWage">基準時給（円）</label>
+      <input type="number" id="baseWage" placeholder="1500" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="overtimeHours">残業時間（時間）</label>
+      <input type="number" id="overtimeHours" placeholder="20" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label>割増率</label>
+      <div class="button-grid" style="margin-top:6px;">
+        <button id="r25" onclick="setRate(25)">25%（通常残業）</button>
+        <button id="r35" onclick="setRate(35)">35%（深夜）</button>
+        <button id="r50" onclick="setRate(50)">50%（深夜残業）</button>
+        <button id="r60" onclick="setRate(60)">60%（月60h超）</button>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="customRate">カスタム割増率（%）</label>
+      <input type="number" id="customRate" placeholder="25" inputmode="decimal">
+    </div>
+  </div>
+
+  <div class="button-grid" style="grid-template-columns:1fr;">
+    <button onclick="calcOvertime()">計算する</button>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-label">計算結果がここに表示されます</div>
+    <div class="result-value">-</div>
+  </div>
+
+  <div id="detailCards"></div>
+
+  <p class="note">※このツールの計算結果は概算です。実際の残業代は就業規則や労働条件により異なります。</p>
+
+  <h2>残業代の計算方法</h2>
+  <p>
+    残業代は「1時間あたりの基礎賃金 × 割増率 × 残業時間」で計算します。労働基準法では、法定労働時間（1日8時間・週40時間）を超える時間外労働に対して、少なくとも25%の割増賃金を支払うことが義務付けられています。深夜（22時〜翌5時）の労働にはさらに25%が加算され、合計50%の割増率になります。また、法定休日に働いた場合は35%以上の割増が必要です。2023年4月からは中小企業でも月60時間を超える残業に対して50%以上の割増率が適用されています。月給制の場合、基礎時給は「月給 ÷ 月の所定労働時間」で算出します。たとえば月給25万円・所定労働時間160時間の場合、基礎時給は1,562円となります。
+  </p>
+
+  <h2>よくある質問</h2>
+
+  <h3>Q. 月給制の場合、基準時給はどう計算しますか？</h3>
+  <p>月給を1ヶ月の所定労働時間（一般的に160〜176時間）で割ると基準時給が算出できます。たとえば月給24万円・所定労働時間160時間の場合は「240,000 ÷ 160 = 1,500円」です。基本給のほか、役職手当や地域手当などの固定手当も算入しますが、通勤手当・家族手当・住宅手当は除外される場合があります。</p>
+
+  <h3>Q. 深夜残業の割増率はどうなりますか？</h3>
+  <p>22時〜翌5時に残業した場合、時間外の25%＋深夜の25%で合計50%の割増率が適用されます。法定休日の深夜労働の場合は、休日35%＋深夜25%で60%の割増率になります。</p>
+
+  <h3>Q. 残業代にも税金はかかりますか？</h3>
+  <p>はい、残業代も給与所得の一部として所得税・住民税の課税対象になります。また、社会保険料の算定基礎にも含まれます。手取りを知りたい場合は<a href="tedori.html">手取り計算ツール</a>で月収全体から概算できます。</p>
+
+  <section class="tools" aria-label="他の計算ツール">
+    <div class="tools-title">他の計算ツール</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="tedori.html">手取り計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="20off.html">20%オフ</a>
+      <a class="tool-link" href="30off.html">30%オフ</a>
+      <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+      <a class="tool-link" href="doubleoff.html">二重割引</a>
+      <a class="tool-link" href="hourly-table.html">時給早見表</a>
+      <a class="tool-link" href="rate-table.html">割合早見表</a>
+      <a class="tool-link" href="nenshu.html">年収計算</a>
+      <a class="tool-link" href="103wall.html">103万の壁</a>
+      <a class="tool-link" href="130wall.html">130万の壁</a>
+      <a class="tool-link" href="salary-table.html">月収早見表</a>
+      <a class="tool-link" href="annual-table.html">年収早見表</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">運営者情報</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <div>© 2025 カルクル</div>
+</footer>
+
+<script>
+var selectedRate = 25;
+
+function setRate(rate) {
+  selectedRate = rate;
+  document.getElementById('customRate').value = rate;
+  var ids = ['r25','r35','r50','r60'];
+  ids.forEach(function(id) { document.getElementById(id).style.opacity = '0.6'; });
+  var map = {25:'r25',35:'r35',50:'r50',60:'r60'};
+  if (map[rate]) document.getElementById(map[rate]).style.opacity = '1';
+}
+setRate(25);
+
+function calcOvertime() {
+  var base = parseFloat(document.getElementById('baseWage').value);
+  var hours = parseFloat(document.getElementById('overtimeHours').value);
+  var custom = document.getElementById('customRate').value;
+  var rate = custom ? parseFloat(custom) : selectedRate;
+
+  if (isNaN(base) || base <= 0) { alert('基準時給を入力してください'); return; }
+  if (isNaN(hours) || hours <= 0) { alert('残業時間を入力してください'); return; }
+  if (isNaN(rate)) { alert('割増率を入力してください'); return; }
+
+  var overtimeWage = Math.floor(base * (1 + rate / 100));
+  var totalPay = Math.floor(overtimeWage * hours);
+
+  document.getElementById('resultSection').innerHTML =
+    '<div class="result-label">残業代合計</div>' +
+    '<div class="result-value">¥' + totalPay.toLocaleString() + '</div>' +
+    '<div class="result-detail">割増時給 ' + overtimeWage.toLocaleString() + '円 × ' + hours + '時間</div>';
+
+  document.getElementById('detailCards').innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">基準時給</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + Math.floor(base).toLocaleString() + '</div></div>' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">割増時給（' + rate + '%増）</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + overtimeWage.toLocaleString() + '</div></div>' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">残業時間</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">' + hours + '時間</div></div>' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">残業代合計</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + totalPay.toLocaleString() + '</div></div>' +
+    '</div>';
+}
+</script>
+
+</body>
+</html>

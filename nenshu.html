@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>年収計算ツール｜月収・時給から年収を計算【カルクル】</title>
+  <meta name="description" content="月収や時給から年収を簡単に計算できる無料ツールです。月収入力モードと時給入力モードを切り替えて、年収の目安をすぐに確認できます。" />
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <a href="index.html" class="app-logo">カルクル</a>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+      <a href="tedori.html" class="nav-link">手取り計算</a>
+    </nav>
+  </div>
+</header>
+
+<main class="app-card">
+  <h1>年収計算ツール</h1>
+  <p>月収または時給から年収の目安を計算します。入力モードを切り替えてご利用ください。</p>
+
+  <div class="input-section">
+    <div class="button-grid" style="margin-bottom:16px;">
+      <button id="btnMonthly" onclick="setMode('monthly')">月収から計算</button>
+      <button id="btnHourly" onclick="setMode('hourly')">時給から計算</button>
+    </div>
+
+    <div id="monthlyMode">
+      <div class="input-group">
+        <label for="monthlyIncome">月収（円）</label>
+        <input type="number" id="monthlyIncome" placeholder="250000" inputmode="decimal">
+      </div>
+    </div>
+
+    <div id="hourlyMode" style="display:none;">
+      <div class="input-group">
+        <label for="hourlyWage">時給（円）</label>
+        <input type="number" id="hourlyWage" placeholder="1200" inputmode="decimal">
+      </div>
+      <div class="input-group">
+        <label for="hoursPerDay">1日の労働時間</label>
+        <input type="number" id="hoursPerDay" placeholder="8" inputmode="decimal">
+      </div>
+      <div class="input-group">
+        <label for="daysPerMonth">月の勤務日数</label>
+        <input type="number" id="daysPerMonth" placeholder="22" inputmode="decimal">
+      </div>
+    </div>
+  </div>
+
+  <div class="button-grid" style="grid-template-columns:1fr;">
+    <button onclick="calcNenshu()">計算する</button>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-label">計算結果がここに表示されます</div>
+    <div class="result-value">-</div>
+  </div>
+
+  <div id="detailCards"></div>
+
+  <p class="note">※このツールの計算結果は概算です。賞与・手当・残業代などは含まれていません。実際の年収は勤務先の条件により異なります。</p>
+
+  <h2>年収の計算方法</h2>
+  <p>
+    年収とは、1年間に得られる給与の総額（税金や社会保険料が引かれる前の額面金額）を指します。月収から年収を求める場合は「月収 × 12か月」で計算できます。時給制で働いている場合は、まず「時給 × 1日の労働時間」で日給を求め、次に「日給 × 月の勤務日数」で月収を算出し、それを12倍することで年間の総支給額がわかります。たとえば時給1,200円・1日8時間・月22日勤務の場合、月収は211,200円、年収は約253万円となります。ただし、このツールで算出される金額は基本給ベースの概算であり、賞与（ボーナス）・各種手当・残業代などは含まれていません。
+  </p>
+
+  <h2>よくある質問</h2>
+
+  <h3>Q. 賞与（ボーナス）は含まれますか？</h3>
+  <p>いいえ、このツールでは賞与は計算に含まれていません。賞与の支給額や回数は企業によって大きく異なるため、基本給ベースの年収のみを算出しています。賞与がある場合は、計算結果に賞与の年間合計額を加えてください。</p>
+
+  <h3>Q. 残業代は計算に含まれますか？</h3>
+  <p>残業代は含まれていません。所定労働時間内の基本給をもとに年収を計算しています。残業代の計算には<a href="overtime.html">残業代計算ツール</a>もご利用いただけます。</p>
+
+  <h3>Q. 手取り額を知りたい場合は？</h3>
+  <p>このツールで算出される年収は額面（総支給額）です。手取り額を知りたい場合は、<a href="tedori.html">手取り計算ツール</a>をご利用ください。月収を入力するだけで手取り額の目安を確認できます。</p>
+
+  <section class="tools" aria-label="他の計算ツール">
+    <div class="tools-title">他の計算ツール</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="tedori.html">手取り計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="20off.html">20%オフ</a>
+      <a class="tool-link" href="30off.html">30%オフ</a>
+      <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+      <a class="tool-link" href="doubleoff.html">二重割引</a>
+      <a class="tool-link" href="hourly-table.html">時給早見表</a>
+      <a class="tool-link" href="rate-table.html">割合早見表</a>
+      <a class="tool-link" href="overtime.html">残業代計算</a>
+      <a class="tool-link" href="103wall.html">103万の壁</a>
+      <a class="tool-link" href="130wall.html">130万の壁</a>
+      <a class="tool-link" href="salary-table.html">月収早見表</a>
+      <a class="tool-link" href="annual-table.html">年収早見表</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">運営者情報</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <div>© 2025 カルクル</div>
+</footer>
+
+<script>
+var currentMode = 'monthly';
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('monthlyMode').style.display = mode === 'monthly' ? '' : 'none';
+  document.getElementById('hourlyMode').style.display = mode === 'hourly' ? '' : 'none';
+  document.getElementById('btnMonthly').style.opacity = mode === 'monthly' ? '1' : '0.6';
+  document.getElementById('btnHourly').style.opacity = mode === 'hourly' ? '1' : '0.6';
+}
+setMode('monthly');
+
+function calcNenshu() {
+  var monthly, daily;
+
+  if (currentMode === 'monthly') {
+    monthly = parseFloat(document.getElementById('monthlyIncome').value);
+    if (isNaN(monthly) || monthly <= 0) { alert('月収を入力してください'); return; }
+  } else {
+    var hourly = parseFloat(document.getElementById('hourlyWage').value);
+    var hours = parseFloat(document.getElementById('hoursPerDay').value);
+    var days = parseFloat(document.getElementById('daysPerMonth').value);
+    if (isNaN(hourly) || isNaN(hours) || isNaN(days)) { alert('すべての項目を入力してください'); return; }
+    daily = hourly * hours;
+    monthly = daily * days;
+  }
+
+  var yearly = monthly * 12;
+
+  document.getElementById('resultSection').innerHTML =
+    '<div class="result-label">年収（概算）</div>' +
+    '<div class="result-value">¥' + Math.floor(yearly).toLocaleString() + '</div>' +
+    '<div class="result-detail">月収 ' + Math.floor(monthly).toLocaleString() + '円 × 12か月</div>';
+
+  var cards = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">';
+  if (daily) {
+    cards += '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+      '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">日給</div>' +
+      '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + Math.floor(daily).toLocaleString() + '</div></div>';
+  }
+  cards += '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">月収</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + Math.floor(monthly).toLocaleString() + '</div></div>';
+  cards += '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">年収</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + Math.floor(yearly).toLocaleString() + '</div></div>';
+  cards += '</div>';
+  document.getElementById('detailCards').innerHTML = cards;
+}
+</script>
+
+</body>
+</html>

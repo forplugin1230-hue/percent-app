@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>103万の壁シミュレーション｜扶養内の年収を簡単チェック【カルクル】</title>
+  <meta name="description" content="パート・アルバイトの年収が103万円を超えるかどうかを簡単にシミュレーションできる無料ツールです。時給・勤務時間・日数を入力するだけで、103万の壁を超えるか即座に判定します。" />
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6896610375368659" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <a href="index.html" class="app-logo">カルクル</a>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+      <a href="tedori.html" class="nav-link">手取り計算</a>
+    </nav>
+  </div>
+</header>
+
+<main class="app-card">
+  <h1>103万の壁シミュレーション</h1>
+  <p>パート・アルバイトで働く方の年収が103万円を超えるかどうかを簡単にチェックできます。時給と勤務条件を入力するだけで、年収の見込みと103万円までの余裕額がわかります。</p>
+
+  <div class="input-section">
+    <div class="input-group">
+      <label for="hourlyWage103">時給（円）</label>
+      <input type="number" id="hourlyWage103" placeholder="1100" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="hoursPerDay103">1日の勤務時間</label>
+      <input type="number" id="hoursPerDay103" placeholder="5" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="daysPerWeek103">週の勤務日数</label>
+      <input type="number" id="daysPerWeek103" placeholder="4" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label for="weeksPerYear103">年間勤務週数</label>
+      <input type="number" id="weeksPerYear103" placeholder="50" inputmode="decimal">
+    </div>
+  </div>
+
+  <div class="button-grid" style="grid-template-columns:1fr;">
+    <button onclick="calc103()">判定する</button>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-label">判定結果がここに表示されます</div>
+    <div class="result-value">-</div>
+  </div>
+
+  <div id="detailCards"></div>
+
+  <p class="note">※このツールは概算シミュレーションです。交通費（非課税分）は年収に含まれません。正確な判定は税務署または勤務先にご確認ください。</p>
+
+  <h2>103万の壁とは</h2>
+  <p>
+    「103万の壁」とは、パートやアルバイトで働く方の年収が103万円を超えると所得税が課税され始める基準のことです。給与所得控除55万円と基礎控除48万円の合計が103万円であるため、年収がこの金額以下であれば所得税はかかりません。また、配偶者が配偶者控除（最大38万円）を受けるためには、被扶養者の年収が103万円以下である必要があります。103万円を超えると配偶者控除の代わりに配偶者特別控除が適用されますが、控除額は段階的に減少します。扶養内で働きたい場合は、月収を約8万5千円以下に抑えることが目安となります。
+  </p>
+
+  <h2>よくある質問</h2>
+
+  <h3>Q. 交通費は103万円に含まれますか？</h3>
+  <p>通勤手当（交通費）のうち非課税限度額（月15万円）以内の分は年収に含まれません。したがって、多くの場合は交通費を除いた給与額で判定します。ただし、非課税限度額を超える部分は課税対象となり、年収に含まれます。</p>
+
+  <h3>Q. 103万円を少し超えた場合、大きく損しますか？</h3>
+  <p>103万円をわずかに超えた場合でも、所得税は超えた分に対してのみ課税されるため（税率5%〜）、手取りが大幅に減ることはありません。ただし、配偶者の勤務先に「家族手当」などがある場合、103万円超で手当が打ち切られるケースがあり、その場合は実質的な負担が大きくなることがあります。</p>
+
+  <h3>Q. 130万の壁との違いは何ですか？</h3>
+  <p>103万の壁は「所得税が発生するかどうか」の基準で、130万の壁は「社会保険の扶養から外れるかどうか」の基準です。年収が130万円を超えると、自分で健康保険・厚生年金に加入する必要があり、保険料負担が大きくなります。詳しくは<a href="130wall.html">130万の壁シミュレーション</a>をご確認ください。</p>
+
+  <section class="tools" aria-label="他の計算ツール">
+    <div class="tools-title">他の計算ツール</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="tedori.html">手取り計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="20off.html">20%オフ</a>
+      <a class="tool-link" href="30off.html">30%オフ</a>
+      <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
+      <a class="tool-link" href="doubleoff.html">二重割引</a>
+      <a class="tool-link" href="hourly-table.html">時給早見表</a>
+      <a class="tool-link" href="rate-table.html">割合早見表</a>
+      <a class="tool-link" href="nenshu.html">年収計算</a>
+      <a class="tool-link" href="overtime.html">残業代計算</a>
+      <a class="tool-link" href="130wall.html">130万の壁</a>
+      <a class="tool-link" href="salary-table.html">月収早見表</a>
+      <a class="tool-link" href="annual-table.html">年収早見表</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">運営者情報</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <div>© 2025 カルクル</div>
+</footer>
+
+<script>
+function calc103() {
+  var wage = parseFloat(document.getElementById('hourlyWage103').value);
+  var hours = parseFloat(document.getElementById('hoursPerDay103').value);
+  var days = parseFloat(document.getElementById('daysPerWeek103').value);
+  var weeks = parseFloat(document.getElementById('weeksPerYear103').value);
+
+  if (isNaN(wage) || isNaN(hours) || isNaN(days) || isNaN(weeks)) {
+    alert('すべての項目を入力してください');
+    return;
+  }
+
+  var yearly = wage * hours * days * weeks;
+  var wall = 1030000;
+  var diff = wall - yearly;
+  var monthly = Math.floor(yearly / 12);
+  var over = yearly > wall;
+
+  var statusText = over
+    ? '<span style="color:#e53e3e;font-weight:800;">超えています</span>'
+    : '<span style="color:#38a169;font-weight:800;">超えていません</span>';
+
+  document.getElementById('resultSection').innerHTML =
+    '<div class="result-label">年収見込み</div>' +
+    '<div class="result-value">¥' + Math.floor(yearly).toLocaleString() + '</div>' +
+    '<div class="result-detail">103万の壁を' + statusText + '</div>';
+
+  var diffLabel = over ? '超過額' : '余裕額';
+  var diffValue = Math.abs(Math.floor(diff));
+
+  document.getElementById('detailCards').innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">月収見込み</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + monthly.toLocaleString() + '</div></div>' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">年収見込み</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥' + Math.floor(yearly).toLocaleString() + '</div></div>' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">103万の壁</div>' +
+    '<div style="font-size:22px;font-weight:800;color:var(--primary);">¥1,030,000</div></div>' +
+    '<div style="background:var(--primary-light);border-radius:12px;padding:18px 14px;text-align:center;">' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">' + diffLabel + '</div>' +
+    '<div style="font-size:22px;font-weight:800;color:' + (over ? '#e53e3e' : '#38a169') + ';">¥' + diffValue.toLocaleString() + '</div></div>' +
+    '</div>';
+}
+</script>
+
+</body>
+</html>
