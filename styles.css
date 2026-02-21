@@ -8,11 +8,12 @@
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
     --primary-light: #dbeafe;
-    --bg: #f8fafc;
+    --bg: #eef2f7;
     --surface: #ffffff;
     --border: #e2e8f0;
     --text: #1e293b;
     --text-muted: #64748b;
+    --header-height: 56px;
 }
 
 * {
@@ -25,38 +26,90 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 20px;
-    max-width: 500px;
+    padding-top: calc(var(--header-height) + 16px);
+}
+
+/* ===========================
+   固定ヘッダー
+   =========================== */
+
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--primary);
+    color: white;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.app-header-inner {
+    max-width: 720px;
     margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
 }
 
-/* ヘッダー */
-.header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 20px 0;
+.app-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: white;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
-h1 {
-    font-size: 32px;
-    color: var(--text);
-    font-weight: 700;
-    margin-bottom: 5px;
+.app-nav {
+    display: flex;
+    gap: 4px;
 }
 
-.subtitle {
-    font-size: 14px;
-    color: var(--text-muted);
+.nav-link {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+    white-space: nowrap;
 }
 
-/* 入力セクション */
-.input-section {
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* ===========================
+   メインカード
+   =========================== */
+
+.app-card {
     background: var(--surface);
-    border: 1px solid var(--border);
+    border-radius: 16px;
+    max-width: 720px;
+    margin: 16px auto;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================
+   入力セクション
+   =========================== */
+
+.input-section {
+    background: #f8fafc;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .input-group {
@@ -92,12 +145,19 @@ input:focus {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-/* ボタングリッド */
+/* ===========================
+   ボタン
+   =========================== */
+
 .button-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-bottom: 20px;
+}
+
+.button-grid.button-full {
+    grid-template-columns: 1fr;
 }
 
 button {
@@ -142,19 +202,24 @@ button:active {
 .btn-tax-out { background: #1e40af; }
 .btn-tax-out:hover { background: #1e3a8a; }
 
-/* 結果セクション */
+/* ===========================
+   結果セクション
+   =========================== */
+
 .result-section {
     background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
     color: white;
-    border-radius: 12px;
-    padding: 25px;
+    border-radius: 16px;
+    padding: 32px 24px;
     margin-bottom: 20px;
     text-align: center;
-    min-height: 120px;
+    min-height: 140px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    box-shadow:
+        0 8px 24px rgba(37, 99, 235, 0.3),
+        0 2px 8px rgba(37, 99, 235, 0.15);
 }
 
 .result-label {
@@ -164,9 +229,10 @@ button:active {
 }
 
 .result-value {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 5px;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
 }
 
 .result-detail {
@@ -174,9 +240,28 @@ button:active {
     opacity: 0.85;
 }
 
-/* 計算履歴 */
+/* シンプルページ用結果表示 */
+.tool-result:not(:empty) {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.7;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* ===========================
+   計算履歴
+   =========================== */
+
 .history-section {
-    margin-top: 30px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
 }
 
 .history-header {
@@ -207,8 +292,7 @@ button:active {
 }
 
 .history-list {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: #f8fafc;
     border-radius: 8px;
     padding: 15px;
     max-height: 300px;
@@ -217,7 +301,7 @@ button:active {
 
 .history-item {
     padding: 12px;
-    background: var(--bg);
+    background: var(--surface);
     border-radius: 6px;
     margin-bottom: 10px;
     font-size: 14px;
@@ -247,227 +331,95 @@ button:active {
 }
 
 /* ===========================
-   アプリレイアウト（新規）
-   =========================== */
-
-/* --- CSS変数追加 --- */
-:root {
-    --header-height: 56px;
-}
-
-/* --- body オーバーライド（ヘッダー固定対応） --- */
-body {
-    padding: 20px;
-    padding-top: calc(var(--header-height) + 16px);
-    background: #eef2f7;
-}
-
-/* --- 固定ヘッダー --- */
-.app-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-height);
-    background: var(--primary);
-    color: white;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-}
-
-.app-header-inner {
-    max-width: 500px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-}
-
-.app-logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    color: white;
-    margin-bottom: 0;
-    text-decoration: none;
-}
-
-.app-nav {
-    display: flex;
-    gap: 6px;
-}
-
-.nav-link {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.2s;
-}
-
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-}
-
-.nav-link.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-/* --- メインカード --- */
-.app-card {
-    background: var(--surface);
-    border-radius: 16px;
-    margin: 16px;
-    padding: 24px 20px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* カード内では input-section の影・枠を消す（二重枠防止） */
-.app-card .input-section {
-    border: none;
-    box-shadow: none;
-    background: #f8fafc;
-}
-
-/* --- 結果セクション強化（オーバーライド） --- */
-.app-card .result-section {
-    border-radius: 16px;
-    padding: 32px 24px;
-    min-height: 140px;
-    box-shadow:
-        0 8px 24px rgba(37, 99, 235, 0.3),
-        0 2px 8px rgba(37, 99, 235, 0.15);
-}
-
-.app-card .result-value {
-    font-size: 48px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-}
-
-/* --- 履歴セクション（カード内調整） --- */
-.app-card .history-section {
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-}
-
-.app-card .history-list {
-    background: #f8fafc;
-    border: none;
-}
-
-/* ===========================
-   レスポンシブ
-   =========================== */
-
-@media (max-width: 400px) {
-    h1 {
-        font-size: 28px;
-    }
-
-    .app-logo {
-        font-size: 18px;
-    }
-
-    .nav-link {
-        padding: 5px 10px;
-        font-size: 12px;
-    }
-
-    .app-card {
-        margin: 12px;
-        padding: 20px 16px;
-    }
-
-    .result-value,
-    .app-card .result-value {
-        font-size: 36px;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 14px;
-    }
-}
-/* ===========================
-   下部導線（関連ツール + フッター）
+   下部導線（関連ツール）
    =========================== */
 
 .tools {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
 }
 
 .tools-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.tools-category {
+    margin-bottom: 16px;
+}
+
+.tools-category:last-child {
+    margin-bottom: 0;
+}
+
+.tools-category-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
 }
 
 .tools-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 .tool-link {
-  display: block;
-  padding: 12px 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #f8fafc;
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 13px;
-  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    display: block;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #f8fafc;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
 }
 
 .tool-link:hover {
-  background: #eef2ff;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
+    background: #eef2ff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
 }
 
+/* ===========================
+   フッター
+   =========================== */
+
 .footer {
-  margin: 22px 16px 28px;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 12px;
+    max-width: 720px;
+    margin: 22px auto 28px;
+    padding: 0 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
 }
 
 .footer a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .footer a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 400px) {
-  .tools-grid { grid-template-columns: 1fr; }
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 /* ===========================
@@ -482,6 +434,11 @@ body {
 .app-card h2 {
     font-size: 16px;
     margin: 18px 0 8px;
+}
+
+.app-card h3 {
+    font-size: 14px;
+    margin: 14px 0 6px;
 }
 
 .app-card p {
@@ -515,18 +472,14 @@ body {
 .app-card .note {
     margin-top: 10px;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.7;
 }
 
-/* ツールページ用の結果表示 */
-.tool-result {
-    margin-top: 16px;
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--primary-dark);
-}
+/* ===========================
+   早見表テーブル
+   =========================== */
 
-/* 早見表テーブル */
 .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -574,153 +527,67 @@ body {
     background: #f8fafc;
 }
 
-@media (max-width: 400px) {
+/* ===========================
+   レスポンシブ（768px以下）
+   =========================== */
+
+@media (max-width: 768px) {
+    .app-header {
+        height: auto;
+    }
+
+    .app-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 10px 16px 8px;
+        gap: 4px;
+    }
+
+    body {
+        padding-top: 120px;
+    }
+
+    .app-nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 2px;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .app-card {
+        margin: 8px 16px;
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    .button-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-value {
+        font-size: 36px;
+    }
+
     .data-table {
         font-size: 12px;
     }
+
     .data-table thead th,
     .data-table tbody td {
         padding: 8px 6px;
     }
-}
 
-/* doubleoff用の行レイアウト */
-.input-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-
-/* ===========================
-   カテゴリナビ
-   =========================== */
-
-.category-nav {
-  display: flex;
-  gap: 4px;
-}
-
-.nav-category {
-  position: relative;
-}
-
-.nav-category > span {
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background 0.2s;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.nav-category:hover > span,
-.nav-category.open > span {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-}
-
-.nav-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-  padding: 6px;
-  min-width: 150px;
-  z-index: 200;
-}
-
-.nav-category:hover .nav-dropdown,
-.nav-category.open .nav-dropdown {
-  display: block;
-}
-
-.nav-dropdown .nav-link {
-  display: block;
-  color: var(--text);
-  padding: 7px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: 5px;
-  white-space: nowrap;
-  background: none;
-}
-
-.nav-dropdown .nav-link:hover {
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-/* ===========================
-   ツールカテゴリセクション
-   =========================== */
-
-.tools-category {
-  margin-bottom: 16px;
-}
-
-.tools-category:last-child {
-  margin-bottom: 0;
-}
-
-.tools-category-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* ===========================
-   モバイル（768px以下）縦並びナビ
-   =========================== */
-
-@media (max-width: 768px) {
-  .app-header {
-    height: auto;
-  }
-
-  .app-header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    padding: 10px 16px 8px;
-    gap: 4px;
-  }
-
-  body {
-    padding-top: 190px;
-  }
-
-  .category-nav {
-    flex-direction: column;
-    width: 100%;
-    gap: 1px;
-  }
-
-  .nav-category {
-    width: 100%;
-  }
-
-  .nav-category > span {
-    display: block;
-    width: 100%;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 4px;
-  }
-
-  .nav-dropdown {
-    left: 0;
-    right: auto;
-  }
+    .footer {
+        margin: 16px 16px 24px;
+    }
 }

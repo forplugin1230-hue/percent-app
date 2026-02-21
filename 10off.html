@@ -14,43 +14,10 @@
 <header class="app-header">
   <div class="app-header-inner">
     <a href="index.html" class="app-logo">カルクル</a>
-    <nav class="app-nav category-nav">
-      <div class="nav-category">
-        <span>基本計算</span>
-        <div class="nav-dropdown">
-          <a href="index.html" class="nav-link">割合計算</a>
-          <a href="jikyuu.html" class="nav-link">時給計算</a>
-          <a href="tedori.html" class="nav-link">手取り計算</a>
-          <a href="nenshu.html" class="nav-link">年収計算</a>
-          <a href="overtime.html" class="nav-link">残業代計算</a>
-        </div>
-      </div>
-      <div class="nav-category">
-        <span>割引計算</span>
-        <div class="nav-dropdown">
-          <a href="10off.html" class="nav-link">10%オフ</a>
-          <a href="20off.html" class="nav-link">20%オフ</a>
-          <a href="30off.html" class="nav-link">30%オフ</a>
-          <a href="gensaku.html" class="nav-link">割引逆算（元値）</a>
-          <a href="doubleoff.html" class="nav-link">二重割引</a>
-        </div>
-      </div>
-      <div class="nav-category">
-        <span>早見表</span>
-        <div class="nav-dropdown">
-          <a href="hourly-table.html" class="nav-link">時給早見表</a>
-          <a href="rate-table.html" class="nav-link">割合早見表</a>
-          <a href="salary-table.html" class="nav-link">月収早見表</a>
-          <a href="annual-table.html" class="nav-link">年収早見表</a>
-        </div>
-      </div>
-      <div class="nav-category">
-        <span>壁シリーズ</span>
-        <div class="nav-dropdown">
-          <a href="103wall.html" class="nav-link">103万の壁</a>
-          <a href="130wall.html" class="nav-link">130万の壁</a>
-        </div>
-      </div>
+    <nav class="app-nav">
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+      <a href="tedori.html" class="nav-link">手取り計算</a>
     </nav>
   </div>
 </header>
@@ -66,7 +33,7 @@
     </div>
   </div>
 
-  <button onclick="calc()" style="width:100%;margin-bottom:20px;">計算する</button>
+  <div class="button-grid button-full"><button onclick="calc()">計算する</button></div>
 
   <div class="tool-result" id="result"></div>
 
@@ -118,6 +85,7 @@
     <a href="terms.html">利用規約</a>
     <a href="privacy.html">プライバシーポリシー</a>
     <a href="contact.html">お問い合わせ</a>
+    <a href="sitemap.html">サイトマップ</a>
   </div>
   <div>© 2025 カルクル</div>
 </footer>
@@ -130,21 +98,6 @@ function calc(){
   document.getElementById("result").textContent =
     "割引後価格： " + discounted.toLocaleString() + " 円";
 }
-</script>
-<script>/* nav-cat-init */
-(function(){
-  document.querySelectorAll('.nav-category>span').forEach(function(s){
-    s.addEventListener('click',function(e){
-      e.stopPropagation();
-      var c=this.parentElement,o=c.classList.contains('open');
-      document.querySelectorAll('.nav-category').forEach(function(x){x.classList.remove('open');});
-      if(!o)c.classList.add('open');
-    });
-  });
-  document.addEventListener('click',function(){
-    document.querySelectorAll('.nav-category').forEach(function(c){c.classList.remove('open');});
-  });
-})();
 </script>
 </body>
 </html>
