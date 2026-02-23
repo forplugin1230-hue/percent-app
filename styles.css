@@ -65,9 +65,65 @@ body {
     flex-shrink: 0;
 }
 
+/* ハンバーガーボタン（スマホのみ表示） */
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 18px;
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    transition: background 0.2s;
+}
+
+.nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: none;
+    box-shadow: none;
+}
+
+/* PC用ナビ */
 .app-nav {
     display: flex;
+    align-items: center;
+}
+
+.nav-quick {
+    display: flex;
     gap: 4px;
+}
+
+/* モバイル用フルメニュー（PC では非表示） */
+.nav-drawer {
+    display: none;
+}
+
+.nav-cat {
+    margin-bottom: 18px;
+}
+
+.nav-cat:last-child {
+    margin-bottom: 0;
+}
+
+.nav-cat-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-link {
@@ -99,6 +155,61 @@ body {
     margin: 16px auto;
     padding: 24px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================
+   2カラムレイアウト (PC 900px+)
+   =========================== */
+
+@media (min-width: 900px) {
+    .app-header-inner {
+        max-width: 960px;
+    }
+
+    .app-card {
+        max-width: 960px;
+    }
+
+    .footer {
+        max-width: 960px;
+    }
+
+    .app-card.has-cols {
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        gap: 0 36px;
+        align-items: start;
+    }
+
+    .side-info {
+        position: sticky;
+        top: calc(var(--header-height) + 20px);
+    }
+
+    .side-info h1 {
+        font-size: 22px;
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+
+    .side-info p,
+    .side-info .note {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--text-muted);
+    }
+
+    .side-info h2 {
+        font-size: 15px;
+        margin: 16px 0 6px;
+        color: var(--text);
+    }
+
+    /* ツール・履歴は全幅 */
+    .app-card.has-cols > .tools,
+    .app-card.has-cols > .history-section {
+        grid-column: 1 / -1;
+    }
 }
 
 /* ===========================
@@ -347,25 +458,6 @@ button:active {
     margin-bottom: 10px;
 }
 
-.tools-category {
-    margin-bottom: 16px;
-}
-
-.tools-category:last-child {
-    margin-bottom: 0;
-}
-
-.tools-category-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-}
-
 .tools-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -528,40 +620,77 @@ button:active {
 }
 
 /* ===========================
-   レスポンシブ（768px以下）
+   スマホ ハンバーガーナビ (max 899px)
    =========================== */
 
-@media (max-width: 768px) {
+@media (max-width: 899px) {
+    /* ヘッダーは常に56px・1行 */
     .app-header {
-        height: auto;
+        height: var(--header-height);
     }
 
     .app-header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        height: auto;
-        padding: 10px 16px 8px;
-        gap: 4px;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        padding: 0 16px;
+        gap: 0;
     }
 
     body {
-        padding-top: 120px;
+        padding-top: calc(var(--header-height) + 16px);
     }
 
+    /* ハンバーガーボタン表示 */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* ナビ：デフォルト非表示、ヘッダー下にドロップダウン */
     .app-nav {
-        flex-direction: column;
-        width: 100%;
-        gap: 2px;
+        display: none;
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: var(--primary-dark);
+        z-index: 99;
+        padding: 16px;
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
-    .nav-link {
+    .app-nav.open {
         display: block;
-        padding: 5px 10px;
-        font-size: 12px;
     }
 
+    /* PC用クイックリンクは非表示 */
+    .nav-quick {
+        display: none;
+    }
+
+    /* モバイル用フルメニュー表示 */
+    .nav-drawer {
+        display: block;
+    }
+
+    .nav-drawer .nav-link {
+        display: block;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.9);
+        border-radius: 6px;
+        margin-bottom: 2px;
+    }
+
+    .nav-drawer .nav-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* カード */
     .app-card {
-        margin: 8px 16px;
+        margin: 8px 12px;
         padding: 20px 16px;
         border-radius: 12px;
     }
@@ -588,6 +717,6 @@ button:active {
     }
 
     .footer {
-        margin: 16px 16px 24px;
+        margin: 16px 12px 24px;
     }
 }

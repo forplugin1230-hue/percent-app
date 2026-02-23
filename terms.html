@@ -14,10 +14,43 @@
 <header class="app-header">
   <div class="app-header-inner">
     <a href="index.html" class="app-logo">カルクル</a>
-    <nav class="app-nav">
-      <a href="index.html" class="nav-link">割合計算</a>
-      <a href="jikyuu.html" class="nav-link">時給計算</a>
-      <a href="tedori.html" class="nav-link">手取り計算</a>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="メニューを開く">&#9776;</button>
+    <nav class="app-nav" id="appNav">
+      <div class="nav-quick">
+        <a href="index.html" class="nav-link">割合計算</a>
+        <a href="jikyuu.html" class="nav-link">時給計算</a>
+        <a href="tedori.html" class="nav-link">手取り計算</a>
+      </div>
+      <div class="nav-drawer">
+        <div class="nav-cat">
+          <span class="nav-cat-label">基本計算</span>
+          <a href="index.html" class="nav-link">割合計算</a>
+          <a href="jikyuu.html" class="nav-link">時給計算</a>
+          <a href="tedori.html" class="nav-link">手取り計算</a>
+          <a href="nenshu.html" class="nav-link">年収計算</a>
+          <a href="overtime.html" class="nav-link">残業代計算</a>
+        </div>
+        <div class="nav-cat">
+          <span class="nav-cat-label">割引計算</span>
+          <a href="10off.html" class="nav-link">10%オフ</a>
+          <a href="20off.html" class="nav-link">20%オフ</a>
+          <a href="30off.html" class="nav-link">30%オフ</a>
+          <a href="gensaku.html" class="nav-link">割引逆算（元値）</a>
+          <a href="doubleoff.html" class="nav-link">二重割引</a>
+        </div>
+        <div class="nav-cat">
+          <span class="nav-cat-label">早見表</span>
+          <a href="hourly-table.html" class="nav-link">時給早見表</a>
+          <a href="rate-table.html" class="nav-link">割合早見表</a>
+          <a href="salary-table.html" class="nav-link">月収早見表</a>
+          <a href="annual-table.html" class="nav-link">年収早見表</a>
+        </div>
+        <div class="nav-cat">
+          <span class="nav-cat-label">壁シリーズ</span>
+          <a href="103wall.html" class="nav-link">103万の壁</a>
+          <a href="130wall.html" class="nav-link">130万の壁</a>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
@@ -75,42 +108,14 @@
     <p class="muted">最終更新日：2026-02-16</p>
   </div>
   <section class="tools" aria-label="他の計算ツール">
-    <div class="tools-title">他の計算ツール</div>
-    <div class="tools-category">
-      <div class="tools-category-label">基本計算</div>
-      <div class="tools-grid">
-        <a class="tool-link" href="index.html">割合計算</a>
-        <a class="tool-link" href="jikyuu.html">時給計算</a>
-        <a class="tool-link" href="tedori.html">手取り計算</a>
-        <a class="tool-link" href="nenshu.html">年収計算</a>
-        <a class="tool-link" href="overtime.html">残業代計算</a>
-      </div>
-    </div>
-    <div class="tools-category">
-      <div class="tools-category-label">割引計算</div>
-      <div class="tools-grid">
-        <a class="tool-link" href="10off.html">10%オフ</a>
-        <a class="tool-link" href="20off.html">20%オフ</a>
-        <a class="tool-link" href="30off.html">30%オフ</a>
-        <a class="tool-link" href="gensaku.html">割引逆算（元値）</a>
-        <a class="tool-link" href="doubleoff.html">二重割引</a>
-      </div>
-    </div>
-    <div class="tools-category">
-      <div class="tools-category-label">早見表</div>
-      <div class="tools-grid">
-        <a class="tool-link" href="hourly-table.html">時給早見表</a>
-        <a class="tool-link" href="rate-table.html">割合早見表</a>
-        <a class="tool-link" href="salary-table.html">月収早見表</a>
-        <a class="tool-link" href="annual-table.html">年収早見表</a>
-      </div>
-    </div>
-    <div class="tools-category">
-      <div class="tools-category-label">壁シリーズ</div>
-      <div class="tools-grid">
-        <a class="tool-link" href="103wall.html">103万の壁</a>
-        <a class="tool-link" href="130wall.html">130万の壁</a>
-      </div>
+    <div class="tools-title">人気ツール</div>
+    <div class="tools-grid">
+      <a class="tool-link" href="index.html">割合計算</a>
+      <a class="tool-link" href="jikyuu.html">時給計算</a>
+      <a class="tool-link" href="tedori.html">手取り計算</a>
+      <a class="tool-link" href="nenshu.html">年収計算</a>
+      <a class="tool-link" href="10off.html">10%オフ</a>
+      <a class="tool-link" href="hourly-table.html">時給早見表</a>
     </div>
   </section>
 </main>
