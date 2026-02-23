@@ -13,8 +13,8 @@
 <header class="app-header">
   <div class="app-header-inner">
     <a href="index.html" class="app-logo">カルクル</a>
-    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="メニューを開く">&#9776;</button>
-    <nav class="app-nav" id="appNav">
+    <button class="nav-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">&#9776;</button>
+    <nav class="app-nav" id="siteNav">
       <div class="nav-quick">
         <a href="index.html" class="nav-link">割合計算</a>
         <a href="jikyuu.html" class="nav-link">時給計算</a>
@@ -130,6 +130,7 @@
       <a class="tool-link" href="nenshu.html">年収計算</a>
       <a class="tool-link" href="10off.html">10%オフ</a>
       <a class="tool-link" href="hourly-table.html">時給早見表</a>
+    <a class="all-tools-link" href="sitemap.html">すべての計算ツールを見る →</a>
     </div>
   </section>
 </main>
@@ -197,5 +198,30 @@ function calcNenshu() {
 }
 </script>
 
+<script>
+(function(){
+  var btn = document.getElementById('menuToggle');
+  var nav = document.getElementById('siteNav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = document.body.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      document.body.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('click', function(e) {
+    if (document.body.classList.contains('nav-open') &&
+        !nav.contains(e.target) && e.target !== btn) {
+      document.body.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
 </body>
 </html>
