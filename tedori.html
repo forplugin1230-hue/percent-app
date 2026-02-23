@@ -15,47 +15,61 @@
 <body>
 <header class="app-header">
   <div class="app-header-inner">
-    <a href="index.html" class="app-logo">カルクル</a>
-    <button class="nav-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">&#9776;</button>
+    <a href="index.html" class="logo-wrap">
+      <span class="logo-title">カルクル</span>
+      <span class="logo-tagline">お財布に、やさしい計算。</span>
+    </a>
+    <button class="nav-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileDrawer">&#9776;</button>
     <nav class="app-nav" id="siteNav">
-      <div class="nav-quick">
-        <a href="index.html" class="nav-link">割合計算</a>
-        <a href="jikyuu.html" class="nav-link">時給計算</a>
-        <a href="tedori.html" class="nav-link">手取り計算</a>
-      </div>
-      <div class="nav-drawer">
-        <div class="nav-cat">
-          <span class="nav-cat-label">基本計算</span>
-          <a href="index.html" class="nav-link">割合計算</a>
-          <a href="jikyuu.html" class="nav-link">時給計算</a>
-          <a href="tedori.html" class="nav-link">手取り計算</a>
-          <a href="nenshu.html" class="nav-link">年収計算</a>
-          <a href="overtime.html" class="nav-link">残業代計算</a>
-        </div>
-        <div class="nav-cat">
-          <span class="nav-cat-label">割引計算</span>
-          <a href="10off.html" class="nav-link">10%オフ</a>
-          <a href="20off.html" class="nav-link">20%オフ</a>
-          <a href="30off.html" class="nav-link">30%オフ</a>
-          <a href="gensaku.html" class="nav-link">割引逆算（元値）</a>
-          <a href="doubleoff.html" class="nav-link">二重割引</a>
-        </div>
-        <div class="nav-cat">
-          <span class="nav-cat-label">早見表</span>
-          <a href="hourly-table.html" class="nav-link">時給早見表</a>
-          <a href="rate-table.html" class="nav-link">割合早見表</a>
-          <a href="salary-table.html" class="nav-link">月収早見表</a>
-          <a href="annual-table.html" class="nav-link">年収早見表</a>
-        </div>
-        <div class="nav-cat">
-          <span class="nav-cat-label">壁シリーズ</span>
-          <a href="103wall.html" class="nav-link">103万の壁</a>
-          <a href="130wall.html" class="nav-link">130万の壁</a>
-        </div>
-      </div>
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+      <a href="tedori.html" class="nav-link">手取り計算</a>
     </nav>
   </div>
 </header>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="メニュー">
+  <div class="drawer-header">
+    <span class="drawer-title">カルクル</span>
+    <button class="drawer-close" id="drawerClose" aria-label="メニューを閉じる">&#x2715;</button>
+  </div>
+  <div class="drawer-body">
+    <div class="nav-cat">
+      <span class="nav-cat-label">基本計算</span>
+      <a href="index.html" class="nav-link">割合計算</a>
+      <a href="jikyuu.html" class="nav-link">時給計算</a>
+      <a href="tedori.html" class="nav-link">手取り計算</a>
+      <a href="nenshu.html" class="nav-link">年収計算</a>
+      <a href="overtime.html" class="nav-link">残業代計算</a>
+    </div>
+    <div class="nav-cat">
+      <span class="nav-cat-label">割引計算</span>
+      <a href="10off.html" class="nav-link">10%オフ</a>
+      <a href="20off.html" class="nav-link">20%オフ</a>
+      <a href="30off.html" class="nav-link">30%オフ</a>
+      <a href="gensaku.html" class="nav-link">割引逆算（元値）</a>
+      <a href="doubleoff.html" class="nav-link">二重割引</a>
+    </div>
+    <div class="nav-cat">
+      <span class="nav-cat-label">早見表</span>
+      <a href="hourly-table.html" class="nav-link">時給早見表</a>
+      <a href="rate-table.html" class="nav-link">割合早見表</a>
+      <a href="salary-table.html" class="nav-link">月収早見表</a>
+      <a href="annual-table.html" class="nav-link">年収早見表</a>
+    </div>
+    <div class="nav-cat">
+      <span class="nav-cat-label">壁シリーズ</span>
+      <a href="103wall.html" class="nav-link">103万の壁</a>
+      <a href="130wall.html" class="nav-link">130万の壁</a>
+    </div>
+    <div class="nav-cat">
+      <span class="nav-cat-label">サイト情報</span>
+      <a href="sitemap.html" class="nav-link">サイトマップ（全ツール）</a>
+      <a href="howto.html" class="nav-link">使い方</a>
+      <a href="about.html" class="nav-link">運営者情報</a>
+    </div>
+  </div>
+</nav>
 
 <main class="app-card has-cols">
     <div class="side-info">
@@ -188,30 +202,29 @@ function calcTedori() {
         '</div>';
 }
 </script>
-
 <script>
 (function(){
-  var btn = document.getElementById('menuToggle');
-  var nav = document.getElementById('siteNav');
-  if (!btn || !nav) return;
-  btn.addEventListener('click', function(e) {
+  var btn=document.getElementById('menuToggle');
+  var drawer=document.getElementById('mobileDrawer');
+  var overlay=document.getElementById('menuOverlay');
+  var closeBtn=document.getElementById('drawerClose');
+  function openMenu(){
+    document.body.classList.add('nav-open');
+    if(btn)btn.setAttribute('aria-expanded','true');
+    if(drawer)drawer.setAttribute('aria-hidden','false');
+  }
+  function closeMenu(){
+    document.body.classList.remove('nav-open');
+    if(btn)btn.setAttribute('aria-expanded','false');
+    if(drawer)drawer.setAttribute('aria-hidden','true');
+  }
+  if(btn)btn.addEventListener('click',function(e){
     e.stopPropagation();
-    var open = document.body.classList.toggle('nav-open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.contains('nav-open')?closeMenu():openMenu();
   });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-      document.body.classList.remove('nav-open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  });
-  document.addEventListener('click', function(e) {
-    if (document.body.classList.contains('nav-open') &&
-        !nav.contains(e.target) && e.target !== btn) {
-      document.body.classList.remove('nav-open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  });
+  if(overlay)overlay.addEventListener('click',closeMenu);
+  if(closeBtn)closeBtn.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
 })();
 </script>
 </body>

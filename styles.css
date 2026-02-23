@@ -55,17 +55,69 @@ body {
     padding: 0 16px;
 }
 
-.app-logo {
+/* ===========================
+   ロゴ＋キャッチコピー
+   =========================== */
+
+.logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    gap: 1px;
+    flex-shrink: 0;
+}
+
+.logo-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     font-weight: 800;
     letter-spacing: 0.02em;
     color: white;
-    text-decoration: none;
-    flex-shrink: 0;
+    line-height: 1.1;
 }
 
-/* ハンバーガーボタン（スマホのみ表示） */
+.logo-tagline {
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* ===========================
+   PC ナビ
+   =========================== */
+
+.app-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* ===========================
+   ハンバーガーボタン（スマホのみ）
+   =========================== */
+
 .nav-toggle {
     display: none;
     background: transparent;
@@ -93,24 +145,86 @@ body {
     box-shadow: none;
 }
 
-/* PC用ナビ */
-.app-nav {
+/* ===========================
+   スマホ サイドドロワー（モバイルのみ表示）
+   =========================== */
+
+/* 半透明オーバーレイ */
+.menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+/* ドロワー本体 */
+.mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -80%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--surface);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.18);
+}
+
+/* ドロワーヘッダー */
+.drawer-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--primary);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
-.nav-quick {
-    display: flex;
-    gap: 4px;
+.drawer-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.02em;
 }
 
-/* モバイル用フルメニュー（PC では非表示） */
-.nav-drawer {
-    display: none;
+.drawer-close {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
+.drawer-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: none;
+    box-shadow: none;
+}
+
+.drawer-body {
+    padding: 16px 20px 32px;
+}
+
+/* ドロワー内カテゴリ */
 .nav-cat {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .nav-cat:last-child {
@@ -121,30 +235,28 @@ body {
     display: block;
     font-size: 10px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 8px;
     padding-bottom: 6px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid var(--border);
 }
 
-.nav-link {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
+.mobile-drawer .nav-link {
+    display: block;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
     border-radius: 6px;
-    transition: all 0.2s;
-    white-space: nowrap;
+    margin-bottom: 2px;
+    transition: background 0.15s, color 0.15s;
 }
 
-.nav-link:hover,
-.nav-link.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+.mobile-drawer .nav-link:hover {
+    background: var(--primary-light);
+    color: var(--primary);
 }
 
 /* ===========================
@@ -300,19 +412,14 @@ button:active {
 /* ボタンカラーバリエーション（青系統一） */
 .btn-discount { background: #2563eb; }
 .btn-discount:hover { background: #1d4ed8; }
-
 .btn-reverse { background: #3b82f6; }
 .btn-reverse:hover { background: #2563eb; }
-
 .btn-increase { background: #2563eb; }
 .btn-increase:hover { background: #1d4ed8; }
-
 .btn-decrease { background: #3b82f6; }
 .btn-decrease:hover { background: #2563eb; }
-
 .btn-tax-in { background: #1e40af; }
 .btn-tax-in:hover { background: #1e3a8a; }
-
 .btn-tax-out { background: #1e40af; }
 .btn-tax-out:hover { background: #1e3a8a; }
 
@@ -647,11 +754,11 @@ button:active {
 }
 
 /* ===========================
-   スマホ ハンバーガーナビ (max 899px)
+   スマホ (max 899px)
    =========================== */
 
 @media (max-width: 899px) {
-    /* ヘッダーは常に56px・1行 */
+    /* ヘッダー常時56px・1行 */
     .app-header {
         height: var(--header-height);
     }
@@ -661,11 +768,15 @@ button:active {
         align-items: center;
         height: 100%;
         padding: 0 16px;
-        gap: 0;
     }
 
     body {
         padding-top: calc(var(--header-height) + 16px);
+    }
+
+    /* キャッチコピーは非表示 */
+    .logo-tagline {
+        display: none;
     }
 
     /* ハンバーガーボタン表示 */
@@ -673,47 +784,33 @@ button:active {
         display: flex;
     }
 
-    /* ナビ：デフォルト非表示、ヘッダー下にドロップダウン */
+    /* PC ナビ非表示（ドロワーが代替） */
     .app-nav {
         display: none;
-        position: fixed;
-        top: var(--header-height);
-        left: 0;
+    }
+
+    /* オーバーレイ表示（開閉はbody.nav-openで制御） */
+    .menu-overlay {
+        display: block;
+    }
+
+    /* ドロワー表示（開閉はbody.nav-openで制御） */
+    .mobile-drawer {
+        display: block;
+    }
+
+    /* メニューオープン時 */
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    body.nav-open .menu-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.nav-open .mobile-drawer {
         right: 0;
-        background: var(--primary-dark);
-        z-index: 99;
-        padding: 16px;
-        max-height: calc(100vh - var(--header-height));
-        overflow-y: auto;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    /* body.nav-open でナビを表示 */
-    body.nav-open .app-nav {
-        display: block;
-    }
-
-    /* PC用クイックリンクは非表示 */
-    .nav-quick {
-        display: none;
-    }
-
-    /* モバイル用フルメニュー表示 */
-    .nav-drawer {
-        display: block;
-    }
-
-    .nav-drawer .nav-link {
-        display: block;
-        padding: 8px 12px;
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.9);
-        border-radius: 6px;
-        margin-bottom: 2px;
-    }
-
-    .nav-drawer .nav-link:hover {
-        background: rgba(255, 255, 255, 0.15);
     }
 
     /* カード */
