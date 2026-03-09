@@ -26,7 +26,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding-top: 80px;
+    padding-top: calc(var(--header-height) + 16px);
 }
 
 /* ===========================
@@ -942,35 +942,3 @@ button:active {
     }
 }
 
-/* PC表示：.app-card をヘッダー下へ確実にずらす */
-@media (min-width: 769px) {
-    .app-card {
-        margin-top: 96px !important;
-    }
-}
-
-@media (min-width: 900px) {
-    .app-card.has-cols {
-        margin-top: 96px !important;
-    }
-}
-
-/* 2カラム時：左右カラムの先頭位置をリセット */
-@media (min-width: 900px) {
-    .app-card.has-cols > * {
-        margin-top: 0 !important;
-        transform: none !important;
-    }
-}
-
-/* 右カラム（計算パネル）の上方向オフセット解除 */
-@media (min-width: 900px) {
-    .calc-panel,
-    .main-panel,
-    .tool-panel {
-        margin-top: 0 !important;
-        top: auto !important;
-        transform: none !important;
-        position: relative;
-    }
-}
