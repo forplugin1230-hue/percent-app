@@ -954,3 +954,23 @@ button:active {
         margin-top: 96px !important;
     }
 }
+
+/* 2カラム時：左右カラムの先頭位置をリセット */
+@media (min-width: 900px) {
+    .app-card.has-cols > * {
+        margin-top: 0 !important;
+        transform: none !important;
+    }
+}
+
+/* 右カラム（計算パネル）の上方向オフセット解除 */
+@media (min-width: 900px) {
+    .calc-panel,
+    .main-panel,
+    .tool-panel {
+        margin-top: 0 !important;
+        top: auto !important;
+        transform: none !important;
+        position: relative;
+    }
+}
