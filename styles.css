@@ -351,9 +351,10 @@ body {
         color: var(--text);
     }
 
-    /* ツール・履歴は全幅 */
+    /* ツール・履歴・解説は全幅 */
     .app-card.has-cols > .tools,
-    .app-card.has-cols > .history-section {
+    .app-card.has-cols > .history-section,
+    .app-card.has-cols > .explain-section {
         grid-column: 1 / -1;
     }
 }
@@ -580,6 +581,69 @@ button:active {
     color: var(--text-muted);
     padding: 20px;
     font-size: 14px;
+}
+
+/* ===========================
+   解説・FAQ セクション
+   =========================== */
+
+.explain-section {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.explain-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 10px;
+}
+
+.explain-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 16px 0 8px;
+}
+
+.explain-body {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0 0 10px;
+}
+
+.explain-list {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-left: 20px;
+    margin: 0 0 10px;
+}
+
+.explain-list li {
+    margin-bottom: 6px;
+}
+
+.faq-list {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.faq-list dt {
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 12px;
+}
+
+.faq-list dd {
+    margin-left: 0;
+    line-height: 1.7;
+    padding-left: 12px;
+    border-left: 2px solid var(--border);
+    margin-top: 4px;
 }
 
 /* ===========================
