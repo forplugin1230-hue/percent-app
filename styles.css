@@ -13,7 +13,7 @@
     --border: #e2e8f0;
     --text: #1e293b;
     --text-muted: #64748b;
-    --header-height: 56px;
+    --header-height: 72px;
 }
 
 * {
@@ -41,7 +41,7 @@ body {
     height: var(--header-height);
     background: var(--primary);
     color: white;
-    z-index: 100;
+    z-index: 200;
     box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
@@ -330,6 +330,7 @@ body {
     .side-info {
         position: sticky;
         top: calc(var(--header-height) + 20px);
+        z-index: 1;
     }
 
     .side-info h1 {
@@ -853,7 +854,7 @@ button:active {
    =========================== */
 
 @media (max-width: 899px) {
-    /* ヘッダー常時56px・1行 */
+    /* ヘッダー高さ・1行レイアウト */
     .app-header {
         height: var(--header-height);
     }
@@ -865,11 +866,7 @@ button:active {
         padding: 0 16px;
     }
 
-    body {
-        padding-top: calc(var(--header-height) + 16px);
-    }
-
-    /* キャッチコピー: 769px以上で表示（768px以下は別ブレークで非表示） */
+    /* body padding-top はグローバルルールで設定済み（重複のため省略） */
 
     /* ハンバーガーボタン表示 */
     .nav-toggle {
