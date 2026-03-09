@@ -941,3 +941,16 @@ button:active {
         display: none;
     }
 }
+
+/* PC表示：.app-card をヘッダー下へ確実にずらす */
+@media (min-width: 769px) {
+    .app-card {
+        margin-top: 96px !important;
+    }
+}
+
+@media (min-width: 900px) {
+    .app-card.has-cols {
+        margin-top: 96px !important;
+    }
+}
