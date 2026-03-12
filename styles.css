@@ -831,6 +831,38 @@ button:active {
     margin-bottom: 6px;
 }
 
+.content-section dl dt {
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 14px;
+}
+.content-section dl dd {
+    margin: 4px 0 0 0;
+    color: var(--text-sub);
+    line-height: 1.7;
+}
+
+.example-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0 16px;
+}
+.example-table th,
+.example-table td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: center;
+}
+.example-table th {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+}
+.example-table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
 .app-card .card {
     border: 1px solid var(--border);
     border-radius: 12px;
