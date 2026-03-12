@@ -689,6 +689,61 @@ button:active {
     box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
 }
 
+/* ===========================
+   関連ページ導線
+   =========================== */
+
+.related-links {
+    margin: 24px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.related-links-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 3px solid var(--primary);
+}
+
+.related-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.related-link-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, background .15s;
+}
+
+.related-link-card:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.related-link-card strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.related-link-card span {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+    line-height: 1.4;
+}
+
 /* 「すべての計算ツールを見る」リンク */
 .all-tools-link {
     grid-column: 1 / -1;
